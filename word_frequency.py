@@ -31,7 +31,6 @@ def is_sentence(text):
 
     return True
 
-user_sentence = input("Enter a sentence: ")
 
 user_sentence = input("Enter a sentence: ")
 while not is_sentence(user_sentence):
