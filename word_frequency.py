@@ -8,6 +8,8 @@
 # 4. Iterate through words and update frequencies
 
 import re
+import string
+
 
 #This is a function that checks if a text qualifies as a sentence. You do not need to modify this!
 def is_sentence(text):
@@ -35,3 +37,20 @@ user_sentence = input("Enter a sentence: ")
 while not is_sentence(user_sentence):
     print("This does not meet the criteria for a sentence.")
     user_sentence = input("Enter a sentence: ")
+
+tokens = user_sentence.split()
+words = []
+freqs = []
+for token in tokens:
+    word = token.strip(string.punctuation).lower()  # remove punctuation, lowercase
+    if word == "":
+        continue
+    if word in words:
+        i = words.index(word)
+        freqs[i] += 1
+    else:
+        words.append(word)
+        freqs.append(1)
+for i in range(len(words)):
+   print(words[i] + ":", freqs[i])
+
