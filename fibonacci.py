@@ -1,29 +1,43 @@
-def get_positive_integer():
-    """Prompt the user for a positive integer and return it."""
+import string
+
+def get_sentence():
+    """Ask the user for a valid sentence."""
     while True:
-        num = input("How many terms of the Fibonacci sequence do you want? ")
-        if num.isdigit() and int(num) > 0:
-            return int(num)
+        sentence = input("Enter a sentence: ")
+        
+        if sentence and sentence[0].isupper() and sentence[-1] in ".!?":
+            return sentence
+        print("Please start with a capital letter and end with '.', '!' or '?'.")
+
+
+def calculate_frequencies(sentence):
+    """Count how many times each word appears."""
+    words = []
+    freqs = []
+    for token in sentence.split():
+        word = token.strip(string.punctuation).lower()
+        if not word:
+            continue
+        if word in words:
+            freqs[words.index(word)] += 1
         else:
-            print("Invalid input. Please enter a positive integer.")
+            words.append(word)
+            freqs.append(1)
+    return words, freqs
 
 
-def generate_fibonacci(n):
-    """generate the Fibonacci sequence up to n terms and return it as a list."""
-    sequence = []
-    a, b = 0, 1
-    for _ in range(n):
-        sequence.append(a)
-        a, b = b, a + b
-    return sequence
+def print_frequencies(words, freqs):
+    """Print the words and their counts."""
+    print("\nWord Frequencies:")
+    for i in range(len(words)):
+        print(f"{words[i]}: {freqs[i]}")
 
 
-def print_fibonacci(sequence):
-    """print the fibonacci sequence in a readable format."""
-    print("Fibonacci sequence:")
-    print(" ".join(str(num) for num in sequence))
+def main():
+    sentence = get_sentence()
+    words, freqs = calculate_frequencies(sentence)
+    print_frequencies(words, freqs)
 
 
-n = get_positive_integer()
-fib_sequence = generate_fibonacci(n)
-print_fibonacci(fib_sequence)
+if __name__ == "__main__":
+    main()
