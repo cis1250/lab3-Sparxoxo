@@ -1,15 +1,29 @@
-def get_positive_integer(prompt):
+def get_positive_integer():
+    """Prompt the user for a positive integer and return it."""
     while True:
-        num = input(prompt)
+        num = input("How many terms of the Fibonacci sequence do you want? ")
         if num.isdigit() and int(num) > 0:
             return int(num)
-        print("Please enter a positive integer.")
+        else:
+            print("Invalid input. Please enter a positive integer.")
 
-def fibonacci(n):
+
+def generate_fibonacci(n):
+    """generate the Fibonacci sequence up to n terms and return it as a list."""
+    sequence = []
     a, b = 0, 1
     for _ in range(n):
-        print(a, end=" ")
+        sequence.append(a)
         a, b = b, a + b
+    return sequence
 
-n = get_positive_integer("How many terms of the Fibonacci sequence do you want? ")
-fibonacci(n)
+
+def print_fibonacci(sequence):
+    """print the fibonacci sequence in a readable format."""
+    print("Fibonacci sequence:")
+    print(" ".join(str(num) for num in sequence))
+
+
+n = get_positive_integer()
+fib_sequence = generate_fibonacci(n)
+print_fibonacci(fib_sequence)
